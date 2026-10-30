@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0e1422">
+  <title>LifeOS - Tu vida en orden</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">L</div>
+      <div>
+        <h2>LifeOS</h2>
+        <small>Tu vida en orden</small>
+      </div>
+    </div>
+
+    <nav>
+      <p class="nav-label">MENÚ PRINCIPAL</p>
+      <button class="nav-item active" data-page="dashboard">⌂ Inicio</button>
+      <button class="nav-item" data-page="tasks">✓ Tareas</button>
+      <button class="nav-item" data-page="calendar">▦ Calendario</button>
+      <button class="nav-item" data-page="money">$ Finanzas</button>
+      <button class="nav-item" data-page="shopping">🛒 Compras</button>
+      <button class="nav-item" data-page="habits">✦ Hábitos</button>
+      <button class="nav-item" data-page="stats">▥ Estadísticas</button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button id="themeToggle" class="nav-item">☀ Cambiar tema</button>
+      <button id="notificationButton" class="nav-item">🔔 Activar notificaciones</button>
+      <p class="version">LifeOS · Versión 1.1</p>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <div>
+        <h1 id="pageTitle">Mi espacio</h1>
+        <p id="currentDate">Organiza tu día.</p>
+      </div>
+      <div class="top-actions">
+        <span id="clock">00:00:00</span>
+      </div>
+    </header>
+
+    <section id="dashboard" class="page active">
+      <div class="welcome-card">
+        <div>
+          <span class="eyebrow">TU ESPACIO PERSONAL</span>
+          <h2>Haz que hoy cuente.</h2>
+          <p>Organiza tus tareas, alcanza tus metas y aprovecha tu tiempo.</p>
+        </div>
+        <div class="welcome-symbol">✦</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span>Tareas pendientes</span>
+          <strong id="pendingCount">0</strong>
+          <small>Por completar</small>
+        </div>
+        <div class="stat-card">
+          <span>Tareas completadas</span>
+          <strong id="completedCount">0</strong>
+          <small>Buen trabajo</small>
+        </div>
+        <div class="stat-card">
+          <span>Eventos próximos</span>
+          <strong id="eventCount">0</strong>
+          <small>En tu calendario</small>
+        </div>
+        <div class="stat-card">
+          <span>Hábitos activos</span>
+          <strong id="habitCount">0</strong>
+          <small>Construye constancia</small>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3>Mis próximas tareas</h3>
+            <button class="text-btn" data-goto="tasks">Ver todas</button>
+          </div>
+          <div id="dashboardTasks" class="item-list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h3>Próximos eventos</h3>
+            <button class="text-btn" data-goto="calendar">Ver calendario</button>
+          </div>
+          <div id="dashboardEvents" class="item-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tasks" class="page">
+      <div class="section-heading">
+        <div>
+          <h2>Mis tareas</h2>
+          <p>Organiza tus pendientes y entregas.</p>
+        </div>
+        <button class="primary-btn" data-add="task">+ Nueva tarea</button>
+      </div>
+      <div id="taskList" class="item-list panel"></div>
+    </section>
+
+    <section id="calendar" class="page">
+      <div class="section-heading">
+        <div>
+          <h2>Calendario</h2>
+          <p>Recuerda tus eventos importantes.</p>
+        </div>
+        <button class="primary-btn" data-add="event">+ Nuevo evento</button>
+      </div>
+      <div id="eventList" class="item-list panel"></div>
+    </section>
+
+    <section id="money" class="page">
+      <div class="section-heading">
+        <div>
+          <h2>Finanzas</h2>
+          <p>Controla tus ingresos y gastos.</p>
+        </div>
+        <button class="primary-btn" data-add="money">+ Movimiento</button>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><span>Ingresos</span><strong id="income">$0.00</strong></div>
+        <div class="stat-card"><span>Gastos</span><strong id="expenses">$0.00</strong></div>
+        <div class="stat-card"><span>Balance</span><strong id="balance">$0.00</strong></div>
+      </div>
+      <div id="moneyList" class="item-list panel"></div>
+    </section>
+
+    <section id="shopping" class="page">
+      <div class="section-heading">
+        <div>
+          <h2>Lista de compras</h2>
+          <p>Ten todo lo que necesitas en un solo lugar.</p>
+        </div>
+        <button class="primary-btn" data-add="product">+ Agregar producto</button>
+      </div>
+      <div id="shoppingList" class="item-list panel"></div>
+    </section>
+
+    <section id="habits" class="page">
+      <div class="section-heading">
+        <div>
+          <h2>Mis hábitos</h2>
+          <p>Pequeñas acciones, grandes resultados.</p>
+        </div>
+        <button class="primary-btn" data-add="habit">+ Nuevo hábito</button>
+      </div>
+      <div id="habitList" class="item-list panel"></div>
+    </section>
+
+    <section id="stats" class="page">
+      <div class="section-heading">
+        <div>
+          <h2>Estadísticas</h2>
+          <p>Observa tu progreso.</p>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><span>Total de tareas</span><strong id="totalStats">0</strong></div>
+        <div class="stat-card"><span>Completadas</span><strong id="doneStats">0</strong></div>
+        <div class="stat-card"><span>Porcentaje completado</span><strong id="percentStats">0%</strong></div>
+      </div>
+      <div class="panel">
+        <h3>Tu progreso</h3>
+        <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">Nuevo elemento</h2>
+      <button id="closeModal" class="close-btn">×</button>
+    </div>
+    <form id="itemForm">
+      <div id="formFields"></div>
+      <button class="primary-btn full-btn" type="submit">Guardar</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
